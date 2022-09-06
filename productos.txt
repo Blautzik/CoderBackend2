@@ -1,0 +1,1 @@
+[{"producto":"album tapa blanda","precio":750,"stock":100,"id":1},{"producto":"album tapa blanda","precio":750,"stock":100,"id":2},{"producto":"album tapa blanda","precio":750,"stock":100,"id":3}]
