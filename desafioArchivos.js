@@ -57,3 +57,6 @@ await container.save(producto)
 await container.save(producto)
 console.log(await container.getAll())
 })()
+
+
+module.exports = Contenedor
