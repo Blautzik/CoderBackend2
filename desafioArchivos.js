@@ -1,4 +1,7 @@
 const fs = require("fs").promises;
+
+
+
 class Contenedor {
   constructor(file) {
     this.file = file;
@@ -57,3 +60,6 @@ await container.save(producto)
 await container.save(producto)
 console.log(await container.getAll())
 })()
+
+
+module.exports = Contenedor;
