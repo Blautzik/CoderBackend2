@@ -7,8 +7,6 @@ const contenedor = new Contenedor('productos.txt');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-
 const productsRouter = require("./src/routes/desafioRouter");
 
 app.use("/api/products", productsRouter)

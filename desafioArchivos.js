@@ -1,7 +1,5 @@
 const fs = require("fs").promises;
 
-
-
 class Contenedor {
   constructor(file) {
     this.file = file;
@@ -47,6 +45,33 @@ class Contenedor {
       console.log("No hay productos para borrar");
     }
   }
+  async updateProduct(product, id) {
+    const arr = await this.getAll();
+    const index = arr.findIndex((p) => {
+      return p.id == id;
+    });
+
+    if (index >= 0) {
+      arr[index].title = product.title;
+      arr[index].price = product.price;
+      arr[index].thumbnail = product.thumbnail;
+
+      await fs.writeFile(this.file, JSON.stringify(arr));
+      return { data: "Producto actualizado" };
+    } else {
+      return { data: "No se pudo actualizar" };
+    }
+  }
+
+  async addProduct(product) {
+    const arr = await this.getAll();
+    arr.push(product);
+    await fs.writeFile(this.file, JSON.stringify(arr));
+    return { data: "Producto agregado" };
+  }
+
+
+
 }
 (async () =>{ const container = new Contenedor("productos.txt");
   const producto = {
