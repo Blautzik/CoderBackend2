@@ -1,1 +1,1 @@
-[{"producto":"album tapa blanda","precio":750,"stock":100,"id":1},{"producto":"album tapa blanda","precio":750,"stock":100,"id":2},{"producto":"album tapa blanda","precio":750,"stock":100,"id":3},{"title":"123","price":123,"thumbnail":"https://res.cloudinary.com/fedexx/image/upload/v1662138096/after/Anotaci%C3%B3n_2022-09-02_133601_ie2tbo.png"}]
+[{"title":"album tapa blanda","price":750,"thumbnail":100,"id":"1"},{"title":"figu messi","price":7500,"thumbnail":100,"id":"2"}]

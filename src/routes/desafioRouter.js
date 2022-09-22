@@ -3,7 +3,7 @@ const { Router } = express;
 const router = new Router();
 
 const Contenedor = require("../../desafioArchivos");
-const contenedor = new Contenedor("products.txt");
+const contenedor = new Contenedor("productos.txt");
 
 router.get("/", (req, res) => {
   res.send("Hola productos");

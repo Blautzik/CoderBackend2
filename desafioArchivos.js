@@ -17,15 +17,16 @@ class Contenedor {
     if (!arrayDeProductos) {
       await fs.writeFile(this.file, "[]");
     } else {
-      producto = { ...producto, id: arrayDeProductos.length +1 };
+      producto = { ...producto, id: arrayDeProductos.length + 1 + '' };
       arrayDeProductos.push(producto);
       await fs.writeFile(this.file, JSON.stringify(arrayDeProductos));
       console.log("se guardo un producto");
       return producto.id;
-    } 
+    }
   }
-  async getById(number) {
+  async getById(num) {
     let showId = await this.getAll();
+    let number = num + ''
     let objectSelected = showId.find((obj) => obj.id === number);
     if (objectSelected) {
       return objectSelected;
@@ -35,7 +36,7 @@ class Contenedor {
   }
   async deleteById(id) {
     const arrayProducts = await this.getAll();
-    const updateArray = arrayProducts.filter((obj) => obj.id !== id);
+    const updateArray = arrayProducts.filter((obj) => Number(obj.id) !== id);
     await fs.writeFile(this.file, JSON.stringify(updateArray));
   }
   async deleteAll() {
@@ -69,22 +70,33 @@ class Contenedor {
     await fs.writeFile(this.file, JSON.stringify(arr));
     return { data: "Producto agregado" };
   }
-
-
-
 }
-(async () =>{ const container = new Contenedor("productos.txt");
+(async () => {
+  const container = new Contenedor("productos.txt");
   const producto = {
-    producto: "album tapa blanda", 
-    precio: 750, 
-    stock: 100
+    title: "album tapa blanda",
+    price: 750,
+    thumbnail: 100,
   };
-await container.deleteAll()
-await container.save(producto)
-await container.save(producto)
-await container.save(producto)
-console.log(await container.getAll())
-})()
+  
+  const producto2 = {
+    title: "figu messi",
+    price: 7500,
+    thumbnail: 100,
+  };
+  
+  
+  await container.deleteAll();
+  await container.save(producto);
+  await container.save(producto);
+  await container.save(producto);
+  console.log(await container.getAll());
 
+  console.log(await container.getById(3))
+  await container.deleteById(3)
+  console.log(await container.getAll())
+  await container.updateProduct(producto2, 2)
+  console.log(await container.getAll())
+})();
 
 module.exports = Contenedor;
