@@ -21,7 +21,6 @@ class Contenedor {
       arrayDeProductos.push(producto);
       await fs.writeFile(this.file, JSON.stringify(arrayDeProductos));
       console.log("se guardo un producto");
-      return producto.id;
     }
   }
   async getById(num) {

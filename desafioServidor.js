@@ -1,31 +1,32 @@
 const express = require('express')
 const app = express()
 const Contenedor = require('./desafioArchivos')
-
+const hbs = require('express-handlebars')
 
 const contenedor = new Contenedor('productos.txt');
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 const productsRouter = require("./src/routes/desafioRouter");
-
 app.use("/api/products", productsRouter)
 
-app.use("/static", express.static(__dirname + "/public"));
 
-app.get("/form", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
-});
+app.engine('hbs', hbs.engine({
+  partialsDir: __dirname+'/src/views/partials',
+  layoutsDir: __dirname+'/src/views/layouts',
+  extname:'.hbs',
+  defaultLayout:'layout1.hbs'
+}))
 
-app.post("/", async (req, res) => {
-  const newProduct = {
-    title: req.body.title,
-    price: Number(req.body.price),
-    thumbnail: req.body.thumbnail,
-  };
-  res.json(await contenedor.addProduct(newProduct));
-});
+app.set('views', './src/views')
+app.set('view engine', 'hbs')
 
+app.get('/', (req,res)=> {
+  res.render('form')
+})
+
+
+app.use('/', productsRouter);
 
 
 const PORT = 8080

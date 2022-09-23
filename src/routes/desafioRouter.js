@@ -5,33 +5,21 @@ const router = new Router();
 const Contenedor = require("../../desafioArchivos");
 const contenedor = new Contenedor("productos.txt");
 
-router.get("/", (req, res) => {
-  res.send("Hola productos");
-});
 
-router.get("/getAll", async (req, res) => {
-  res.json(await contenedor.getAll());
-});
-router.get("/:id", async (req, res) => {
-  res.json(await contenedor.getById(req.params.id));
-});
 
-router.post("/", async (req, res) => {
-  res.send(await contenedor.save(req.body));
-});
+router.get('/productos', (req, res) => {
+  res.render('form');
+})
 
-router.put("/:id", async (req, res) => {
-  let product = await contenedor.getById(req.params.id);
+router.get('/listaproductos', async (req, res) => {
+  productos = await contenedor.getAll()
+  res.render('productos', { productos });
+})
 
-  product.title = req.body.title;
-  product.price = req.body.price;
-  product.thumbnail = req.body.thumbnail;
+router.post('/productos', async (req, res) => {
+  await contenedor.save(req.body)
+  res.render('form')
+})
 
-  res.json(await contendor.updateProduct(product, req.params.id));
-});
-
-router.delete("/:id", async (req, res) => {
-  res.json(await contenedor.deleteById(req.params.id));
-});
 
 module.exports = router;

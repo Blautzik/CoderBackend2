@@ -1,0 +1,25 @@
+<section>
+    <h2 >Ingrese Producto</h2>
+    <form action='/productos' method='POST'>
+        <div >
+            <label for='title'>Nombre</label>
+            <input type='text' name='title' />
+        </div>
+        <div >
+            <label for='price'>Precio</label>
+            <input type='number' name='price' />
+        </div>
+        <div >
+            <label for='thumbnail'>Foto URL</label>
+            <input type='url' name='thumbnail' />
+        </div>
+        <div>
+            <input type='submit' value='Enviar' />
+        </div>
+    </form>
+    <div>
+        <a href="./listaproductos">
+            <button>Ver Productos</button>
+        </a>
+    </div>
+</section>
